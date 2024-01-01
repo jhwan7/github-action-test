@@ -1,0 +1,29 @@
+name: CI Workflow
+
+on:
+  pull_request:
+    branches: [ main, develop ]
+  push:
+    branches: ['*']
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build
+      run: echo "Build step goes here"
+    - name: Print some variables
+      run: |
+        echo "Repository: ${{ github.repository }}"
+        echo "Commit SHA: ${{ github.sha }}"
+        echo "Triggered by: ${{ github.actor }}"
+    - name: Run a script
+      id: script
+      run: |
+        # Imagine this script outputs a value we want to capture
+        result=$(./result.sh)
+        echo "RESULT=$result" >> $GITHUB_ENV
+    - name: Test
+      run: >
+        curl -X POST -H "Authorization: token ${{secrets.GITHUB_TOKEN}}" -d '{"state": "success", "description": "Custom status message", "context": "Your Context"}' https://api.github.com/repos/${{ github.repository }}/statuses/${{ github.sha }}
