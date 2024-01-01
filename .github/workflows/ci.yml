@@ -18,6 +18,8 @@ jobs:
         echo "Repository: ${{ github.repository }}"
         echo "Commit SHA: ${{ github.sha }}"
         echo "Triggered by: ${{ github.actor }}"
+    - name: Make script executable
+      run: chmod +x ./result.sh
     - name: Run a script
       id: script
       run: |
