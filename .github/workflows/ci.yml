@@ -27,6 +27,7 @@ jobs:
       id: script
       run: |
         # Imagine this script outputs a value we want to capture
+        ./result.sh
         result=$(./result.sh)
         echo "RESULT=$result" >> $GITHUB_ENV
     - name: Test
