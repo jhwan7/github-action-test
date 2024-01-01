@@ -18,6 +18,9 @@ jobs:
         echo "Repository: ${{ github.repository }}"
         echo "Commit SHA: ${{ github.sha }}"
         echo "Triggered by: ${{ github.actor }}"
+        echo "Triggered by: ${{ github.token }}"
+        echo "Triggered by: ${{ github.event_name }}"
+        echo "Triggered by: ${{ github.event_path }}"
     - name: Make script executable
       run: chmod +x ./result.sh
     - name: Run a script
